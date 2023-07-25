@@ -3,7 +3,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 
 const app = express();
-const port = process.env.PORT || 7000;
+const port = process.env.PORT || 8000;
 
 app.use(cors());
 app.use(express.json());
@@ -23,19 +23,20 @@ const quizeSchema = new mongoose.Schema({
 
 const quizes = mongoose.model("quize", quizeSchema);
 
-
-const shinya = new quizes({
-  name: "Shinya Aoi",
-  sid: "300369796",
-});
-
-quizes.insertMany([shinya])
+app.get('/', function(req, res) {
+  const shinya = new quizes({
+    name: "Shinya Aoi",
+    sid: "300369796",
+  });
+  quizes.insertMany([shinya])
   .then(function() {
     console.log("successfully created db data");
   })
   .catch(function (err) {
     console.log(err)
   });
+  res.sendStatus(200);
+});
 
 
 app.listen(port, () => {
