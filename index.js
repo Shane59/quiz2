@@ -28,14 +28,14 @@ app.get('/', function(req, res) {
     name: "Shinya Aoi",
     sid: "300369796",
   });
-  quizes.insertMany([shinya])
+  quizes.collection.insertOne(shinya)
   .then(function() {
     console.log("successfully created db data");
+    res.sendStatus(200);
   })
   .catch(function (err) {
     console.log(err)
   });
-  res.sendStatus(200);
 });
 
 
